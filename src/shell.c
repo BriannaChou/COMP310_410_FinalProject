@@ -1,4 +1,5 @@
 
+#include "rprintf.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -8,10 +9,12 @@ int main(int argc, char **argv) {
     char *line, **argz;
     pid_t pid, wpid;
     size_t bufsize = 0;
+    size_t input_len;
 
     while(1){
         // 1. Call printf to print a prompt. Something like $ or > is fine.
-        
+        printf("$ ");
+
         // 2. Call getline() to read a line from the terminal. The arguments to
         //    getline are:
         //    (i)   The address of line
@@ -20,11 +23,20 @@ int main(int argc, char **argv) {
         //    Make sure you initialize line to NULL before calling getline,
         //    otherwise getline won't do anything. `man getline` has some good
         //    example code.
+	line = NULL;
+	if((input_len = getline(&line, &bufsize, stdin)) == -1) {
+		printf("Error while reading console. Exit code 1\n");
+		exit(1);
+	}
+	printf(line);
 
         // 3. getline() will return a line of text, including the \n newline
         //    character. We need to trim that off. Something like
         //           line[strlen(line)-1] = '\0';
         //    should do.
+	command = line[strlen(line)-1] = '\0';
+
+	// Call command handling function here and pass parameter command
 
 
         // 4. Call fork():
