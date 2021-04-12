@@ -19,11 +19,11 @@ OBJS = \
 	rprintf.o \
 	page.o \
 	list.o \
-	#sd.o
+	sd.o \
 	fat.o  \
 	clibfuncs.o \
 	shell.o \
-	#fgets.o
+	fgets.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
