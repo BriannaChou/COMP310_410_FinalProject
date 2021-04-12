@@ -1,12 +1,11 @@
 
-#include "rprintf.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 
 int main(int argc, char **argv) {
-    char *line, **argz;
+    char *command, **argz;
     pid_t pid, wpid;
     size_t bufsize = 0;
     size_t input_len;
@@ -23,18 +22,18 @@ int main(int argc, char **argv) {
         //    Make sure you initialize line to NULL before calling getline,
         //    otherwise getline won't do anything. `man getline` has some good
         //    example code.
-	line = NULL;
-	if((input_len = getline(&line, &bufsize, stdin)) == -1) {
+	command = NULL;
+	if((input_len = getline(&command, &bufsize, stdin)) == -1) {
 		printf("Error while reading console. Exit code 1\n");
 		exit(1);
 	}
-	printf(line);
+	printf(command);
 
         // 3. getline() will return a line of text, including the \n newline
         //    character. We need to trim that off. Something like
         //           line[strlen(line)-1] = '\0';
         //    should do.
-	command = line[strlen(line)-1] = '\0';
+	command[strlen(command)-1] = '\0';
 
 	// Call command handling function here and pass parameter command
 
