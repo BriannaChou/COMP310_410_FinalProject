@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
     while(1){
         // 1. Call printf to print a prompt. Something like $ or > is fine.
-        
+
         // 2. Call getline() to read a line from the terminal. The arguments to
         //    getline are:
         //    (i)   The address of line
