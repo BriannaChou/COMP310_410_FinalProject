@@ -5,12 +5,17 @@
 #include <string.h>
 
 int main(int argc, char **argv) {
-    char *line, **argz;
+    char *command, **argz;
     pid_t pid, wpid;
     size_t bufsize = 0;
+    size_t input_len;
 
     while(1){
         // 1. Call printf to print a prompt. Something like $ or > is fine.
+<<<<<<< HEAD
+=======
+        printf("$ ");
+>>>>>>> ea19148de87867a76b04468b638b60610b8eb65b
 
         // 2. Call getline() to read a line from the terminal. The arguments to
         //    getline are:
@@ -20,11 +25,20 @@ int main(int argc, char **argv) {
         //    Make sure you initialize line to NULL before calling getline,
         //    otherwise getline won't do anything. `man getline` has some good
         //    example code.
+	command = NULL;
+	if((input_len = getline(&command, &bufsize, stdin)) == -1) {
+		printf("Error while reading console. Exit code 1\n");
+		exit(1);
+	}
+	printf(command);
 
         // 3. getline() will return a line of text, including the \n newline
         //    character. We need to trim that off. Something like
         //           line[strlen(line)-1] = '\0';
         //    should do.
+	command[strlen(command)-1] = '\0';
+
+	// Call command handling function here and pass parameter command
 
 
         // 4. Call fork():
