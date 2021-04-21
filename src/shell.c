@@ -1,39 +1,34 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+#include "uart.h"
+#include "rprintf.h"
+#include "serial.h"
 
-int main(int argc, char **argv) {
-    char *command, **argz;
-    pid_t pid, wpid;
-    size_t bufsize = 0;
-    size_t input_len;
+#define MAX_INPUT_SIZE 1000
+
+int shell_main(int argc, char **argv) {
+
+    uart_init();
+    char input_command[MAX_INPUT_SIZE];
 
     while(1){
-        // 1. Call printf to print a prompt. Something like $ or > is fine.
-        printf("$ ");
+        // 1. Print command line prompt
+        esp_printf((void *) putc, "$ ");
 
-        // 2. Call getline() to read a line from the terminal. The arguments to
-        //    getline are:
-        //    (i)   The address of line
-        //    (ii)  The address of bufsize
-        //    (iii) stdin
-        //    Make sure you initialize line to NULL before calling getline,
-        //    otherwise getline won't do anything. `man getline` has some good
-        //    example code.
-	command = NULL;
-	if((input_len = getline(&command, &bufsize, stdin)) == -1) {
-		printf("Error while reading console. Exit code 1\n");
-		exit(1);
+        // 2. Call readLine() to read a line from the terminal. The parsed argument (char *) is the data structure that will be filled with the terminal line
+        //    readLine() is also responsible for writing every received key to the console so the user can read what he typed before rpessing Enter.
+	//    TODO: Execute received command (either directory operation or process call)
+	//    Currently: Echos received line back to terminal
+	readLine(input_command);
+	if(input_command == NULL) {
+		esp_printf((void *) putc, "Error while reading console. Exit code 1\n");
 	}
-	printf(command);
+	uart_puts(input_command);
 
         // 3. getline() will return a line of text, including the \n newline
         //    character. We need to trim that off. Something like
         //           line[strlen(line)-1] = '\0';
         //    should do.
-	command[strlen(command)-1] = '\0';
+	//command[strlen(command)-1] = '\0';
 
 	// Call command handling function here and pass parameter command
 
