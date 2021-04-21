@@ -11,6 +11,7 @@ int shell_main(int argc, char **argv) {
     char input_command[MAX_INPUT_SIZE];
 
     while(1){
+
         // 1. Print command line prompt
         esp_printf((void *) putc, "$ ");
 
