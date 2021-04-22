@@ -4,8 +4,11 @@
 
 #define MU_IO_ADR 0x3F215040
 
+void deleteLast(char c, int * c_counter, char * input);
+void clearArray(char * array, int array_size);
+
 void putc(int data) {
-	unsigned int * mu_io_reg = (unsigned int *) MU_IO_ADR;
+	unsigned int *mu_io_reg = (unsigned int *) MU_IO_ADR;
 	*mu_io_reg = data;
 }
 
@@ -30,4 +33,10 @@ void clearArray(char *array, int array_size) {
 	for(int i = 0; i < array_size; i++) {
 		array[i] = 0;
 	}
+}
+
+void deleteLast(char c, int * c_counter, char* input) {
+	input[*c_counter - 1] = '\n';
+	uart_puts(input);
+	c_counter--;
 }
