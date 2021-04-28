@@ -7,8 +7,8 @@
 /*                                                   */
 /*---------------------------------------------------*/
 
-#include <stddef.h>
 #include "rprintf.h"
+#include "clibfuncs.h"
 /*---------------------------------------------------*/
 /* The purpose of this routine is to output data the */
 /* same as the standard printf function without the  */
@@ -25,7 +25,7 @@ static int num1;
 static int num2;
 static char pad_character;
 
-#if 0
+/*
 size_t strlen(const char *str) {
     unsigned int len = 0;
     while(str[len] != '\0') {
@@ -48,7 +48,7 @@ int isdig(int c) {
         return 0;
     }
 }
-#endif
+*/
 
 
 
@@ -164,7 +164,7 @@ void esp_printf( const func_ptr f_ptr, charptr ctrl, ...)
   va_start(args, *ctrl);
   esp_vprintf(f_ptr, ctrl, args);
   va_end( args );
-  
+ 
 }
 
 void esp_vprintf( const func_ptr f_ptr, charptr ctrl, va_list argp)
@@ -283,3 +283,4 @@ try_next:
    }
 
 /*---------------------------------------------------*/
+

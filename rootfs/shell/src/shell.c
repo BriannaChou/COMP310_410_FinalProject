@@ -1,15 +1,17 @@
 
 #include "uart.h"
 #include "rprintf.h"
-#include "serial.h"
+#include "uart.h"
 
 #define MAX_INPUT_SIZE 1000
 
-int shell_main(int argc, char **argv) {
+int main(int argc, char **argv) {
 
-    uart_init();
     char input_command[MAX_INPUT_SIZE];
 
+    esp_printf(uart_send, "Hello from the shell!!!");    
+
+#if 0
     while(1){
 
         // 1. Print command line prompt
@@ -73,5 +75,6 @@ int shell_main(int argc, char **argv) {
         // 7. For the parent process, free(argz) and free(line), and go on to
         //    the next iteration of the loop.
     }
+#endif
 }
 
