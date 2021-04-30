@@ -1,7 +1,7 @@
 
-CC := aarch64-none-elf-gcc
-LD := aarch64-none-elf-ld
-SIZE := aarch64-none-elf-size
+CC := gcc
+LD := ld
+SIZE := size
 
 
 OBJFILENAME = shell
@@ -17,10 +17,11 @@ SDIR = src
 OBJS = \
 	shell.o \
 	start.o \
-    nalloc.o \
-    rprintf.o \
-    clibfuncs.o \
-    uart.o \
+    	nalloc.o \
+    	rprintf.o \
+    	clibfuncs.o \
+    	uart.o \
+	serial.o \
 
 
 
