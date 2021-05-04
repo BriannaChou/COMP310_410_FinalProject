@@ -80,5 +80,5 @@ struct file {
 };
 //-----------------------------------------
 void fatOpen(struct file* whatever, char* filename );
-//void fatRead(struct file* whatever,char buffer, int bytes_2_read);
+void fatRead(struct file* whatever,char buffer, int bytes_2_read);
 #endif

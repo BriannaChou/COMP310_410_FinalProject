@@ -13,6 +13,8 @@ void kernel_main(int argc, char *argv[]) {
 	init_pfs_list();
 
 	memInit();
+
+	fatInit();
 	
 	// ... Put your other init code here like MMU init etc
 
