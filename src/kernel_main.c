@@ -10,7 +10,7 @@ void kernel_main(int argc, char *argv[]) {
 
 	uart_init();
 
-	init_pfs_list();
+	init_pfa_list();
 
 	memInit();
 
