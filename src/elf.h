@@ -36,7 +36,42 @@ struct elf32_header {
     uint16_t  e_shstrndx;     // Section header string table index
 }__attribute__((packed));
 
-struct elf_program_header {
+struct elf64_header {
+    uint32_t  magic;          // Magic number should be 0x7f 'E' 'L' 'F'
+    uint8_t   elfclass;       // 1- 32bit, 2- 64bit ELF file
+    uint8_t   endianness;     // 1- Little endian, 2- Big endian
+    uint8_t   elfversion;     // Version of the ELF file
+    uint8_t   osabi;          // ABI
+    uint8_t   osabiversion;   // ABI version
+    uint8_t   pad[7];         // Unused
+    uint16_t  e_type;         // Object file type
+    uint16_t  e_machine;      // Architecture
+    uint32_t  e_version;      // Object file version
+    uint64_t  e_entry;        // Entry point virtual address
+    uint64_t  e_phoff;        // Program header table file offset
+    uint64_t  e_shoff;        // Section header table file offset
+    uint32_t  e_flags;        // Processor-specific flags
+    uint16_t  e_ehsize;       // ELF header size in bytes
+    uint16_t  e_phentsize;    // Program header table entry size
+    uint16_t  e_phnum;        // Program header table entry count
+    uint16_t  e_shentsize;    // Section header table entry size
+    uint16_t  e_shnum;        // Section header table entry count
+    uint16_t  e_shstrndx;     // Section header string table index
+}__attribute__((packed));
+
+struct elf64_program_header {
+    uint32_t type;          // Segment type
+    uint32_t flags;         // Segment-dependent flags
+    uint64_t offset;        // Offset of segment within the image
+    uint64_t vaddr;       // Virtual address of the segment
+    uint64_t paddr;         // Physical address of segment
+    uint64_t filesz;        // Size of the segment in the file image
+    uint64_t memsz;         // Size of the segment in memory
+    uint64_t align;         // 0/1: No alignment. Otherwise, should be power of 2
+};
+
+
+struct elf32_program_header {
     uint32_t type;          // Segment type
     uint32_t offset;        // Offset of segment within the image
     uint32_t vaddr;       // Virtual address of the segment

@@ -1,7 +1,7 @@
 
-CC := gcc
-LD := ld
-SIZE := size
+CC := aarch64-none-elf-gcc
+LD := aarch64-none-elf-ld
+SIZE := aarch64-none-elf-size
 
 
 OBJFILENAME = shell
