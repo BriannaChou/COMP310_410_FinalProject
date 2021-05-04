@@ -34,8 +34,7 @@ void listDelete(struct block *b);
 
 
 #ifdef DEBUG
-int getTotalBlockSize(struct block *listHead, int *numItems);
-double getExpectedBlockSize(struct block *listHead);
+int getTotalBlockSize(stBlockSize(struct block *listHead);
 void printHeap() ;
 #endif
 

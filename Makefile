@@ -24,6 +24,7 @@ OBJS = \
 	clibfuncs.o \
     	uart.o \
 	nalloc.o \
+	mmu.o \
 #	fgets.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
