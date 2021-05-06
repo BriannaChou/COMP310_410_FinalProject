@@ -8,6 +8,7 @@
 /*---------------------------------------------------*/
 
 #include <stddef.h>
+#include "clibfuncs.h"
 #include "rprintf.h"
 /*---------------------------------------------------*/
 /* The purpose of this routine is to output data the */
@@ -119,6 +120,7 @@ static void outnum(unsigned int num, const int base)
    *cp-- = 0;
 
    /* Move the converted number to the buffer and    */
+   
    /* add in the padding where needed.               */
    len = strlen(outbuf);
    padding( !left_flag);

@@ -3,6 +3,8 @@
 
 #include "page.h"
 
+typedef unsigned int uint32_t;
+
 struct process {
 	struct process *next;
 	struct process *prev;
