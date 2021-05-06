@@ -1,6 +1,8 @@
 #include "mmu.h"
 
 
+struct table_descriptor_stage1 L1table[512] __attribute__((aligned(4096)));
+struct page_descriptor_stage1 L2table[512] __attribute__((aligned(4096)));
 
 /*
 
@@ -93,6 +95,15 @@ int loadPageTable(struct table_descriptor_stage1 *L1table) {
     r|=  (1<<0);     // set M, enable MMU
     asm volatile ("msr sctlr_el1, %0; isb" : : "r" (r));
     return 0;
+}
+
+int isMapped(void *vaddr) {
+	unsigned int L2tableIndex = ((unsigned int)vaddr >> 21) & 0x1ff;
+    	unsigned int L1tableIndex = ((unsigned int)vaddr >> 30) & 0x1ff;
+	if(L2table[L2tableIndex].type == 0) {
+		return 0;
+	}
+	return 1;
 }
 
 

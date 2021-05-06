@@ -48,8 +48,7 @@ struct page_descriptor_stage1 {
 
 void mapPages(void *vaddr, void *paddr);
 int loadPageTable(struct table_descriptor_stage1 *L1table);
+int isMapped(void *vaddr);
 
-struct table_descriptor_stage1 L1table[512] __attribute__((aligned(4096)));
-struct page_descriptor_stage1 L2table[512] __attribute__((aligned(4096)));
 
 

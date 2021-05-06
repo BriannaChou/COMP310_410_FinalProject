@@ -35,15 +35,17 @@ int exec(char *path) {
 	struct ppage *program_ppage;
 	for(i = 0; i < elf_file_hdr->e_phnum; i++) {
         	// WARNING: check to see if prog_header->vaddr is already mapped. if so, don't map it. If it's not already mapped, then call mapPages and map it.
-		program_ppage = allocate_physical_page();
-		mapPages((void *) elf_prog_header[i].vaddr, (void *) elf_prog_header[i].paddr);
+		if(!isMapped((void *) elf_prog_header[i].vaddr)) {
+			program_ppage = allocate_physical_page();
+			mapPages((void *) elf_prog_header[i].vaddr, (void *) elf_prog_header[i].paddr);
 
-		// (b) copy the program header's contents into the mapped space
-		memcpy((void *) elf_prog_header[i].vaddr, (void *) elf_prog_header[i].offset, elf_prog_header[i].filesz);
-		// link neighbor physical pages
-		struct ppage *prev_ppage = program_ppage;
-		program_ppage = program_ppage->next;
-		program_ppage->prev = prev_ppage;
+			// (b) copy the program header's contents into the mapped space
+			memcpy((void *) elf_prog_header[i].vaddr, (void *) elf_prog_header[i].offset, elf_prog_header[i].filesz);
+			// link neighbor physical pages
+			struct ppage *prev_ppage = program_ppage;
+			program_ppage = program_ppage->next;
+			program_ppage->prev = prev_ppage;
+		}
 	}
 
     	// 6. Free the temporary space you allocated in step 3.
@@ -51,10 +53,13 @@ int exec(char *path) {
 
 	// Allocate a page for the stack and put the top of stack in the SP register
     	char * top_of_stack = (char *) 0x800000;
-    	asm ("mov sp, %0" : : "r" (top_of_stack));
+    	asm ("mov sp, %0"
+		       	: "=r" (top_of_stack)
+			:);
     	// 7. Jump to the entry point
-        asm("bx %0" : : "r" (elf_file_hdr->e_entry));
+        asm("br %0"
+			: "=r" (elf_file_hdr->e_entry)
+			:);
 
 	return 0;
 }
-

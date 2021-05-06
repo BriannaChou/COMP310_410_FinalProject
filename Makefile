@@ -32,7 +32,6 @@ OBJS = \
 	nalloc.o \
 	mmu.o \
 	process.o \
-	elf.o \
 	sd.o \
 #	fgets.o \
 

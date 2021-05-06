@@ -4,6 +4,7 @@
 #include "page.h"
 
 typedef unsigned int uint32_t;
+typedef unsigned long uint64_t;
 
 struct process {
 	struct process *next;
