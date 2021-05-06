@@ -1,14 +1,14 @@
 
-CC := aarch64-none-elf-gcc
-LD := aarch64-none-elf-ld
-OBJDUMP := aarch64-none-elf-objdump
-OBJCOPY := aarch64-none-elf-objcopy
+#CC := aarch64-none-elf-gcc
+#LD := aarch64-none-elf-ld
+#OBJDUMP := aarch64-none-elf-objdump
+#OBJCOPY := aarch64-none-elf-objcopy
 
 
-#CC := gcc
-#LD := ld
-#OBJDUMP := objdump
-#OBJCOPY := objcopy
+CC := gcc
+LD := ld
+OBJDUMP := objdump
+OBJCOPY := objcopy
 
 CONFIGS := -DCONFIG_HEAP_SIZE=4096
 
@@ -26,12 +26,14 @@ OBJS = \
 	rprintf.o \
 	page.o \
 	list.o \
-	sd.o \
 	fat.o  \
 	clibfuncs.o \
     	uart.o \
 	nalloc.o \
 	mmu.o \
+	process.o \
+	elf.o \
+	sd.o \
 #	fgets.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
