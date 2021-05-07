@@ -77,6 +77,6 @@ rootfs.img:
 	sudo mkdir -p /mnt/disk/boot/firmware
 	sudo mkdir /mnt/disk/bin
 	sudo mkdir /mnt/disk/etc
-	sudo cp rootfs/shell/shell /mnt/disk/bin
+	sudo cp rootfs/shell/shell /mnt/disk
 	sudo umount /mnt/disk
 

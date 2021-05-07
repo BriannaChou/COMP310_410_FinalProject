@@ -132,7 +132,7 @@ int sd_status(unsigned int mask)
 
 void wait_msec(unsigned int delaynumber ){
 	unsigned int x = 0;
-	for (x; x < delaynumber; x++){
+	for (x; x < delaynumber * 1000; x++){
 		asm("NOP");
 	} //1 second delay
 }

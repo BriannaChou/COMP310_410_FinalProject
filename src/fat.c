@@ -73,15 +73,14 @@ void fatOpen(struct file* whatever, char* filename){
 }
 
 //Reads data from a file into a buffer
-void fatRead(struct file* fileName,char buffer, int bytes_2_read){
+void fatRead(struct file* fileName,char *buffer, int bytes_2_read){
 	int root_sector_value = ((bs->num_fat_tables * bs->num_sectors_per_fat) + bs->num_hidden_sectors + bs->num_reserved_sectors);
 	esp_printf(putc, "Cluster stuff--> %d \n", fileName->rde.cluster);
 	int begin_data = bs->num_reserved_sectors + (bs->num_fat_tables * bs->num_sectors_per_fat) + ((bs->num_root_dir_entries * 32) + (bs->bytes_per_sector - 1)) / bs->bytes_per_sector;
 	int data_sector = begin_data + ((fileName->rde.cluster-2) * bs->num_sectors_per_cluster);
 	//int sd_readblock(unsigned int lba, unsigned char *buffer, unsigned int num);
-	char buffer2[512];
-	sd_readblock(data_sector,buffer2,1);
-	esp_printf(putc,"Stuff-->%s",buffer2);
+	sd_readblock(data_sector,buffer,bs->num_sectors_per_cluster);
+	esp_printf(putc,"Stuff-->%s",buffer);
 	int first_root_dir_sector = begin_data + ((bs->num_root_dir_entries)/512);
 	esp_printf(putc, "First root dir --> %d \n", begin_data);
 	esp_printf(putc, "variable y --> %d \n", data_sector);
