@@ -12,20 +12,17 @@
 #define MAX_INPUT_SIZE 1000
 
 void kernel_main(int argc, char *argv[]) {
-
+	
+	// Initializations
 	uart_init();
 
 	//init_pfa_list();
-
+	
 	memInit();
 
 	sd_init();
 
 	fatInit();
 
-	esp_printf((void *) putc, "3. FAT FS initialized!");
-	
-	// ... Put your other init code here like MMU init etc
-
-	exec("shell");
+	exec("/shell");
 }
