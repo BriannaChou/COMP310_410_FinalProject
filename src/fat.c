@@ -43,7 +43,7 @@ int fatInit() {
 
 struct file *file_open;
 //Opens a file in a FAT filesystem on disk.
-void fatOpen(struct file* whatever, char* filename){
+void fat_open(struct file* whatever, char* filename){
 	int t_sectors =  bs->num_root_dir_entries;
 	int t = 1;
 	char buffer[10];
@@ -73,7 +73,7 @@ void fatOpen(struct file* whatever, char* filename){
 }
 
 //Reads data from a file into a buffer
-void fatRead(struct file* fileName,char *buffer, int bytes_2_read){
+/*void fatRead(struct file* fileName,char *buffer, int bytes_2_read){
 	int root_sector_value = ((bs->num_fat_tables * bs->num_sectors_per_fat) + bs->num_hidden_sectors + bs->num_reserved_sectors);
 	esp_printf(putc, "Cluster stuff --> %d \n", fileName->rde.cluster);
 	int begin_data = bs->num_reserved_sectors + (bs->num_fat_tables * bs->num_sectors_per_fat) + ((bs->num_root_dir_entries * 32) + (bs->bytes_per_sector - 1)) / bs->bytes_per_sector;
@@ -84,12 +84,7 @@ void fatRead(struct file* fileName,char *buffer, int bytes_2_read){
 	int first_root_dir_sector = begin_data + ((bs->num_root_dir_entries)/512);
 	esp_printf(putc, "First root dir --> %d \n", begin_data);
 	esp_printf(putc, "Data sector --> %d \n", data_sector);
-}
-
-
-
-
-
+}*/
 
 
 
