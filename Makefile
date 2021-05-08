@@ -26,14 +26,13 @@ OBJS = \
 	rprintf.o \
 	page.o \
 	list.o \
-	fat.o  \
 	clibfuncs.o \
     	uart.o \
 	nalloc.o \
 	mmu.o \
 	process.o \
 	sd.o \
-#	fgets.o \
+	nfat.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -77,6 +76,6 @@ rootfs.img:
 	sudo mkdir -p /mnt/disk/boot/firmware
 	sudo mkdir /mnt/disk/bin
 	sudo mkdir /mnt/disk/etc
-	sudo cp rootfs/shell/shell /mnt/disk
+	sudo cp rootfs/shell/obj/shell /mnt/disk/bin
 	sudo umount /mnt/disk
 
