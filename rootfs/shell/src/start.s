@@ -6,5 +6,5 @@
 
 _start:
     str lr,[sp,#-8]!
-    bl main
+    bl shelly
 

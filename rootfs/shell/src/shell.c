@@ -2,7 +2,7 @@
 #include "serial.h"
 #include "rprintf.h"
 
-int main(int argc, char *argv[]) {
+int shelly() {
 
 	char input_command[MAX_INPUT_SIZE];
 
