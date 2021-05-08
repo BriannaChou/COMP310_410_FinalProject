@@ -1,7 +1,7 @@
 
 #include "uart.h"
 #include "mmu.h"
-#include "fat.h"
+#include "nfat.h"
 #include "nalloc.h"
 #include "page.h"
 #include "process.h"
@@ -22,7 +22,7 @@ void kernel_main(int argc, char *argv[]) {
 
 	sd_init();
 
-	fatInit();
+	fatFSInit();
 
-	exec("/shell");
+	exec("/bin/shell");
 }

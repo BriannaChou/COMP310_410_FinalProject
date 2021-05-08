@@ -1,10 +1,12 @@
 #include "process.h"
 #include "nalloc.h"
 #include "clibfuncs.h"
-#include "fat.h"
+#include "nfat.h"
 #include "elf.h"
 #include "page.h"
 #include "mmu.h"
+#include "rprintf.h"
+#include "serial.h"
 
 int exec(char *path) {
 
@@ -16,17 +18,19 @@ int exec(char *path) {
 
     	// 2. Call fatOpen() to open the file given by path
 	struct file fp;
-	fatOpen(&fp, path);
+	fatOpen(path, &fp);
+	esp_printf((void *) putc, "File opened!\n");
 
     	// 3. Allocate some memory to load the file's contents. you can use nalloc() or you can temporarily map a memory page with mapPages().
     	char *file_content;
-        file_content = (char *) nalloc(sizeof(char) * 100000);
+        file_content = (char *) nalloc(fatGetFileSize(&fp));
 	struct elf64_header *elf_file_hdr = (struct elf64_header *) file_content;
 	// write function in fat.c to find file size (should be in iNode)
 
     	// 4. Call fatRead() to read the file's contents into your temporary bufffer.
-	fatRead(&fp, file_content, 100000);
-	// fix fatRead() function
+	fatRead(&fp, file_content, fatGetFileSize(&fp));
+	esp_printf((void *) putc, "File read complete!\n");
+	
 
     	// 5. Loop through the program headers in the ELF file and (a) map a physical page for each program header and (b) copy the program header's contents into the space you mapped.
 	struct elf64_program_header *elf_prog_header = (struct elf64_program_header *) (file_content + elf_file_hdr->e_phoff);
